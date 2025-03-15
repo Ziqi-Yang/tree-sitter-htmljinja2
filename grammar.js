@@ -17,7 +17,6 @@ module.exports = grammar({
     /\s+/,
   ],
 
-
   externals: ($) => [
     $._start_tag_name,
     $._script_start_tag_name,
@@ -26,7 +25,7 @@ module.exports = grammar({
     $.erroneous_end_tag_name,
     '/>',
     $._implicit_end_tag,
-    $.raw_text,
+    $._raw_text,
     $.comment,
   ],
 
@@ -81,7 +80,10 @@ module.exports = grammar({
 
     script_element: $ => seq(
       alias($.script_start_tag, $.start_tag),
-      optional($.raw_text),
+      alias(repeat(choice(
+        $._raw_text,
+        $._jinja
+      )), $.raw_text),
       $.end_tag,
     ),
     
@@ -95,7 +97,10 @@ module.exports = grammar({
 
     style_element: $ => seq(
       alias($.style_start_tag, $.start_tag),
-      optional($.raw_text),
+      alias(repeat(choice(
+        $._raw_text,
+        $._jinja
+      )), "raw_text"),
       $.end_tag,
     ),
     
@@ -105,8 +110,6 @@ module.exports = grammar({
       repeat($.attribute),
       '>',
     ),
-
-
 
     attribute: $ => seq(
       $.attribute_name,

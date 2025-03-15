@@ -148,25 +148,47 @@ static bool scan_raw_text(Scanner *scanner, TSLexer *lexer) {
     lexer->mark_end(lexer);
 
     const char *end_delimiter = array_back(&scanner->tags)->type == SCRIPT ? "</SCRIPT" : "</STYLE";
-
     unsigned delimiter_index = 0;
+    bool has_content = false;
+
     while (lexer->lookahead) {
+        // Check for HTML end tag
         if (towupper(lexer->lookahead) == end_delimiter[delimiter_index]) {
             delimiter_index++;
             if (delimiter_index == strlen(end_delimiter)) {
                 break;
             }
             advance(lexer);
-        } else {
+        }
+        // Check for Jinja delimiters
+        else if (lexer->lookahead == '{') {
+            lexer->mark_end(lexer);
+            advance(lexer);
+
+            if (lexer->lookahead == '{' || lexer->lookahead == '%' || lexer->lookahead == '#') {
+                break;
+            }
+            
             delimiter_index = 0;
             advance(lexer);
+            has_content = true;
+            lexer->mark_end(lexer);
+        } 
+        else {
+            delimiter_index = 0;
+            advance(lexer);
+            has_content = true;
             lexer->mark_end(lexer);
         }
     }
 
-    lexer->result_symbol = RAW_TEXT;
-    return true;
+    if (has_content) {
+        lexer->result_symbol = RAW_TEXT;
+        return true;
+    }
+    return false;
 }
+
 
 static void pop_tag(Scanner *scanner) {
     Tag popped_tag = array_pop(&scanner->tags);

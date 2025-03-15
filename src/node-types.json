@@ -321,6 +321,29 @@
     "fields": {}
   },
   {
+    "type": "raw_text",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_for_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_output",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "script_element",
     "named": true,
     "fields": {},
@@ -446,10 +469,6 @@
           "named": true
         },
         {
-          "type": "raw_text",
-          "named": true
-        },
-        {
           "type": "start_tag",
           "named": true
         }
@@ -524,10 +543,6 @@
   {
     "type": "keyword",
     "named": false
-  },
-  {
-    "type": "raw_text",
-    "named": true
   },
   {
     "type": "tag_name",
