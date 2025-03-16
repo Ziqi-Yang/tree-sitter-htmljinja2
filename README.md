@@ -1,6 +1,46 @@
 # tree-sitter-htmljinja2
 
-An opinionated html+jinja2 grammar.
+An opinionated html+jinja2 grammar, made for easy integration with editors.
+
+## Rules
+
+- **Jinja expression should be placed in scopes**
+
+For example, you can write 
+
+```jinja
+<ul id="{{ v }}">
+```
+
+but you cannot write
+
+```jinja
+<ul id="{{ '"' }}>
+```
+
+- **Jinja expressions cannot split `script` and `style` tag**
+
+For example, you can write
+
+```jinja
+<script>
+{{ v }}
+</script>
+```
+
+but you cannot write
+
+```jinja
+{% if true %}
+<script>
+{% endif %}
+
+{% if true %}
+</script>
+{% endif %}
+```
+
+
 
 ## Reference
 
