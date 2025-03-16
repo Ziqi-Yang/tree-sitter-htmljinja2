@@ -22,7 +22,7 @@ export function jinja_expression_in_statement($) {
 }
 
 export function jinja_keyword(kw) {
-  return alias(token(prec(1, kw)), "keyword");
+  return alias(token(kw), "keyword");
 }
 
 export function jinja_context_specifier() {

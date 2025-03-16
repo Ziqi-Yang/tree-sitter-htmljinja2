@@ -1509,6 +1509,30 @@
       "required": true,
       "types": [
         {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
           "type": "text",
           "named": true
         }
@@ -1996,14 +2020,6 @@
   },
   {
     "type": "keyword",
-    "named": false
-  },
-  {
-    "type": "raw_end",
-    "named": false
-  },
-  {
-    "type": "raw_start",
     "named": false
   },
   {

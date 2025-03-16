@@ -58,6 +58,16 @@ module.exports = grammar({
       $.text,
       $._jinja
     ),
+
+    _html_node: $ => choice(
+      $.doctype,
+      $.script_element,
+      $.style_element,
+      $.erroneous_end_tag,
+      $.element,
+      $.entity,
+      $.text,
+    ),
     
     // HTML ==================================================================
     doctype: $ => seq(
@@ -345,24 +355,15 @@ module.exports = grammar({
     ),
 
     jinja_raw_statement: $ => seq(
-      alias(
-        token(seq(jinja_statement_start(), /\s*raw\s*/, jinja_statement_end())),
-        "raw_start",
-      ),
-      $.text,
-      alias(
-        token(seq(jinja_statement_start(), /\s*endraw\s*/, jinja_statement_end())),
-        "raw_end",
-      ),
+      jinja_statement("raw"),
+      $._html_node,
+      jinja_statement("endraw"),
     ),
 
-    jinja_custom_statement: $ => prec.dynamic(
-      -1,
-      seq(
-        jinja_statement_start(),
-        alias($._jinja_expression_in_statement, $.jinja_custom_tag),
-        jinja_statement_end(),
-      ),
+    jinja_custom_statement: $ => seq(
+      jinja_statement_start(),
+      alias($._jinja_expression_in_statement, $.jinja_custom_tag),
+      jinja_statement_end(),
     ),
 
 
