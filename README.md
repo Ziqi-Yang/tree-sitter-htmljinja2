@@ -43,6 +43,10 @@ but you cannot write
 {% endif %}
 ```
 
+## Editor Integration:
+
+Emacs: [htmljinja2-ts-mode](https://codeberg.org/meow_king/htmljinja2-ts-mode)
+
 ## Play with this grammar
 
 ```
