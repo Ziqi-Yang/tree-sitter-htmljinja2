@@ -2,6 +2,8 @@
  * @file html+jinja2
  * @author Meow King <mr.meowking@posteo.com>
  * @license MIT
+ * @reference https://github.com/tree-sitter/tree-sitter-html
+ * @reference https://github.com/geigerzaehler/tree-sitter-jinja2
  */
 
 /// <reference types="tree-sitter-cli/dsl" />
