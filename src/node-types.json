@@ -278,10 +278,6 @@
           "named": true
         },
         {
-          "type": "single_element",
-          "named": true
-        },
-        {
           "type": "start_tag",
           "named": true
         },
@@ -450,10 +446,6 @@
           "named": true
         },
         {
-          "type": "single_element",
-          "named": true
-        },
-        {
           "type": "style_element",
           "named": true
         },
@@ -565,10 +557,6 @@
         },
         {
           "type": "script_element",
-          "named": true
-        },
-        {
-          "type": "single_element",
           "named": true
         },
         {
@@ -962,10 +950,6 @@
           "named": true
         },
         {
-          "type": "single_element",
-          "named": true
-        },
-        {
           "type": "style_element",
           "named": true
         },
@@ -1066,10 +1050,6 @@
           },
           {
             "type": "script_element",
-            "named": true
-          },
-          {
-            "type": "single_element",
             "named": true
           },
           {
@@ -1174,10 +1154,6 @@
           },
           {
             "type": "script_element",
-            "named": true
-          },
-          {
-            "type": "single_element",
             "named": true
           },
           {
@@ -1499,10 +1475,6 @@
           "named": true
         },
         {
-          "type": "single_element",
-          "named": true
-        },
-        {
           "type": "style_element",
           "named": true
         },
@@ -1652,10 +1624,6 @@
           "named": true
         },
         {
-          "type": "single_element",
-          "named": true
-        },
-        {
           "type": "style_element",
           "named": true
         },
@@ -1673,7 +1641,7 @@
   },
   {
     "type": "raw_text",
-    "named": true,
+    "named": false,
     "fields": {},
     "children": {
       "multiple": true,
@@ -1898,10 +1866,6 @@
         },
         {
           "type": "script_element",
-          "named": true
-        },
-        {
-          "type": "single_element",
           "named": true
         },
         {

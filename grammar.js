@@ -54,7 +54,6 @@ module.exports = grammar({
       $.style_element,
       $.erroneous_end_tag,
       $.element,
-      $.single_element, // 🐶
       $.entity,
       $.text,
       $._jinja
@@ -79,7 +78,7 @@ module.exports = grammar({
       $.self_closing_tag,
     ),
     
-    single_element: $ => choice(
+    single_element: $ => choice(  // 🐶
       $.start_tag,
       $.end_tag
     ),
@@ -241,19 +240,28 @@ module.exports = grammar({
 
     jinja_if_statement: $ => seq(
       jinja_statement("if", field("condition", jinja_expression_in_statement($))),
-      field("body", repeat($._node)),
+      field("body", repeat(choice(
+        $._node,
+        $.single_element,
+      ))),
       field("elif", repeat($.jinja_elif_statement)),
       choice(field("else", $.jinja_else_statement), jinja_statement("endif")),
     ),
 
     jinja_elif_statement: $ => seq(
       jinja_statement("elif", field("condition", jinja_expression_in_statement($))),
-      repeat($._node),
+      repeat(choice(
+        $._node,
+        $.single_element,
+      )),
     ),
 
     jinja_else_statement: $ => seq(
       jinja_statement("else"),
-      field("body", repeat($._node)),
+      field("body", repeat(choice(
+        $._node,
+        $.single_element,
+      ))),
       jinja_statement("endif"),
     ),
 

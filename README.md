@@ -2,6 +2,9 @@
 
 An opinionated html+jinja2 grammar, made for easy integration with editors.
 
+Jinja template doesn't have major difference between Django template, so you can
+also use it to edit Django files.
+
 ## Rules
 
 - **Jinja expression should be placed in scopes**
@@ -40,6 +43,34 @@ but you cannot write
 {% endif %}
 ```
 
+## Play with this grammar
+
+```
+tree-sitter play
+```
+
+## Limitations
+
+For paired HTML element splitting, we currently only allow split it in Jinja `if`
+expression. For example,
+
+```jinja
+{% if true %}
+<div>
+{% else }
+<div>
+{% endif %}
+
+{% if true %}
+</div>
+{% endif %}
+```
+
+You should also don't put too much elements inside these spans since it may pair wrong
+elements like `<div>` matches `</ul>`.
+
+Though, it does bring some benefits other than precision, such as 3x performance boost
+compared to allowing split elements everywhere.
 
 
 ## Reference
