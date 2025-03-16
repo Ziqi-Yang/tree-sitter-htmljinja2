@@ -46,30 +46,30 @@ Real World - 0
         (start_tag
           (tag_name))
         (text)
-        (single_element
-          (end_tag
-            (tag_name)))
-        (single_element
-          (end_tag
-            (tag_name)))
-        (element
-          (start_tag
-            (tag_name))
-          (single_element
-            (start_tag
-              (tag_name)
-              (attribute
-                (attribute_name)
-                (quoted_attribute_value
-                  (jinja_output
-                    (jinja_expression))))
-              (attribute
-                (attribute_name)
-                (quoted_attribute_value
-                  (jinja_output
-                    (jinja_expression))))))
-          (jinja_for_statement
-            (jinja_expression)
+        (end_tag
+          (tag_name)))
+      (end_tag
+        (tag_name)))
+    (element
+      (start_tag
+        (tag_name))
+      (element
+        (start_tag
+          (tag_name)
+          (attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (jinja_output
+                (jinja_expression))))
+          (attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (jinja_output
+                (jinja_expression)))))
+        (jinja_for_statement
+          (start_statement
+            (expression))
+          (body
             (element
               (start_tag
                 (tag_name))
@@ -87,27 +87,34 @@ Real World - 0
                   (tag_name)))
               (end_tag
                 (tag_name))))
-          (end_tag
-            (tag_name)))
-        (single_element
-          (start_tag
-            (tag_name)))
+          (end_statement))
+        (end_tag
+          (tag_name)))
+      (element
+        (start_tag
+          (tag_name))
         (jinja_output
           (jinja_expression))
         (end_tag
           (tag_name)))
       (jinja_comment)
       (jinja_if_statement
-        (jinja_expression)
-        (single_element
-          (start_tag
-            (tag_name))))
+        (start_statement
+          (expression))
+        (body
+          (single_element
+            (start_tag
+              (tag_name))))
+        (end_statement))
       (text)
       (jinja_if_statement
-        (jinja_expression)
-        (single_element
-          (end_tag
-            (tag_name))))
+        (start_statement
+          (expression))
+        (body
+          (single_element
+            (end_tag
+              (tag_name))))
+        (end_statement))
       (end_tag
         (tag_name)))
     (end_tag

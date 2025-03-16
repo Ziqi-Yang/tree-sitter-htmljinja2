@@ -21,13 +21,19 @@ Element Split by Jinja Expressions
     (end_tag
       (tag_name)))
   (jinja_if_statement
-    (jinja_expression)
-    (single_element
-      (start_tag
-        (tag_name))))
+    (start_statement
+      (expression))
+    (body
+      (single_element
+        (start_tag
+          (tag_name))))
+    (end_statement))
   (text)
   (jinja_if_statement
-    (jinja_expression)
-    (single_element
-      (end_tag
-        (tag_name)))))
+    (start_statement
+      (expression))
+    (body
+      (single_element
+        (end_tag
+          (tag_name))))
+    (end_statement)))
