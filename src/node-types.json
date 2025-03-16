@@ -675,11 +675,6 @@
     "fields": {}
   },
   {
-    "type": "jinja_expression",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "jinja_extends_statement",
     "named": true,
     "fields": {},
@@ -947,7 +942,7 @@
       "required": false,
       "types": [
         {
-          "type": "jinja_expression",
+          "type": "expression",
           "named": true
         }
       ]

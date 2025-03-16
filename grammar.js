@@ -217,7 +217,7 @@ module.exports = grammar({
     _jinja_expression_in_statement: () => repeat1(/[^\s\%\-\+]+|[\%\-\+]/),
     
     jinja_output: ($) =>
-      seq("{{", alias(optional($._jinja_output_code), $.jinja_expression), "}}"),
+      seq("{{", alias(optional($._jinja_output_code), $.expression), "}}"),
     _jinja_output_code: () => prec.right(repeat1(/[^\s\}\-\+]+|[\}\-\+]/)),
 
 

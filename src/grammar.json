@@ -614,7 +614,7 @@
             ]
           },
           "named": true,
-          "value": "jinja_expression"
+          "value": "expression"
         },
         {
           "type": "STRING",

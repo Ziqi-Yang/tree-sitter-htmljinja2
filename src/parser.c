@@ -16,7 +16,7 @@
 #define STATE_COUNT 1053
 #define LARGE_STATE_COUNT 2
 #define SYMBOL_COUNT 143
-#define ALIAS_COUNT 6
+#define ALIAS_COUNT 5
 #define TOKEN_COUNT 70
 #define EXTERNAL_TOKEN_COUNT 9
 #define FIELD_COUNT 8
@@ -168,10 +168,9 @@ enum ts_symbol_identifiers {
   aux_sym_text_repeat1 = 142,
   anon_alias_sym_attribute_value = 143,
   alias_sym_body = 144,
-  alias_sym_expression = 145,
-  alias_sym_jinja_custom_tag = 146,
-  anon_alias_sym_raw_text = 147,
-  alias_sym_raw_text = 148,
+  alias_sym_jinja_custom_tag = 145,
+  anon_alias_sym_raw_text = 146,
+  alias_sym_raw_text = 147,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -266,7 +265,7 @@ static const char * const ts_symbol_names[] = {
   [sym__jinja] = "_jinja",
   [aux_sym__jinja_expression_in_statement] = "_jinja_expression_in_statement",
   [sym_jinja_output] = "jinja_output",
-  [sym__jinja_output_code] = "jinja_expression",
+  [sym__jinja_output_code] = "expression",
   [sym__jinja_statement] = "_jinja_statement",
   [sym_jinja_for_statement] = "jinja_for_statement",
   [sym_jinja_for_statement_start] = "start_statement",
@@ -320,7 +319,6 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_text_repeat1] = "text_repeat1",
   [anon_alias_sym_attribute_value] = "attribute_value",
   [alias_sym_body] = "body",
-  [alias_sym_expression] = "expression",
   [alias_sym_jinja_custom_tag] = "jinja_custom_tag",
   [anon_alias_sym_raw_text] = "raw_text",
   [alias_sym_raw_text] = "raw_text",
@@ -472,7 +470,6 @@ static const TSSymbol ts_symbol_map[] = {
   [aux_sym_text_repeat1] = aux_sym_text_repeat1,
   [anon_alias_sym_attribute_value] = anon_alias_sym_attribute_value,
   [alias_sym_body] = alias_sym_body,
-  [alias_sym_expression] = alias_sym_expression,
   [alias_sym_jinja_custom_tag] = alias_sym_jinja_custom_tag,
   [anon_alias_sym_raw_text] = anon_alias_sym_raw_text,
   [alias_sym_raw_text] = alias_sym_raw_text,
@@ -1059,10 +1056,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [alias_sym_expression] = {
-    .visible = true,
-    .named = true,
-  },
   [alias_sym_jinja_custom_tag] = {
     .visible = true,
     .named = true,
@@ -1146,25 +1139,25 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
     [1] = alias_sym_body,
   },
   [6] = {
-    [2] = alias_sym_expression,
+    [2] = sym__jinja_output_code,
   },
   [7] = {
-    [2] = alias_sym_expression,
+    [2] = sym__jinja_output_code,
   },
   [8] = {
-    [2] = alias_sym_expression,
+    [2] = sym__jinja_output_code,
   },
   [9] = {
-    [2] = alias_sym_expression,
+    [2] = sym__jinja_output_code,
   },
   [10] = {
-    [2] = alias_sym_expression,
+    [2] = sym__jinja_output_code,
   },
   [11] = {
-    [2] = alias_sym_expression,
+    [2] = sym__jinja_output_code,
   },
   [13] = {
-    [2] = alias_sym_expression,
+    [2] = sym__jinja_output_code,
   },
   [14] = {
     [3] = anon_sym_ignoremissing,
@@ -1177,8 +1170,8 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
 static const uint16_t ts_non_terminal_alias_map[] = {
   aux_sym__jinja_expression_in_statement, 3,
     aux_sym__jinja_expression_in_statement,
-    alias_sym_expression,
     alias_sym_jinja_custom_tag,
+    sym__jinja_output_code,
   aux_sym_source_file_repeat1, 2,
     aux_sym_source_file_repeat1,
     alias_sym_body,
