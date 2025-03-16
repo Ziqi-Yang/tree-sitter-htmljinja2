@@ -4,6 +4,8 @@ t: gen
 cmd *args:
   tree-sitter {{args}}
 
+test: (cmd "test")
+
 play: wasm (cmd "play")
 
 wasm: gen (cmd "build --wasm")

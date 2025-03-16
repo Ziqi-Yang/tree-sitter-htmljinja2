@@ -1,0 +1,129 @@
+================================================================================
+if statement
+================================================================================
+{% if x y z %}
+  body
+{% endif %}
+
+{% if x y z %}
+{% else %}
+  body
+{% endif %}
+--------------------------------------------------------------------------------
+
+(template
+  (if_statement
+    (expression)
+    (text))
+  (if_statement
+    (expression)
+    (else_statement
+      (text))))
+
+================================================================================
+if statement wit elif
+================================================================================
+{% if x y z %}
+{% elif foo %}
+{% elif bar %}
+{% endif %}
+
+{% if x y z %}
+{% elif foo %}
+{% custom_tag %}
+{% elif bar %}
+{% else %}
+{% endif %}
+--------------------------------------------------------------------------------
+
+(template
+  (if_statement
+    condition: (expression)
+    elif: (elif_statement
+      condition: (expression))
+    elif: (elif_statement
+      condition: (expression)))
+  (if_statement
+    condition: (expression)
+    elif: (elif_statement
+      condition: (expression)
+      (custom_statement
+        (custom_tag)))
+    elif: (elif_statement
+      condition: (expression))
+    else: (else_statement)))
+
+================================================================================
+nested if
+================================================================================
+{% if x %}
+  {% if x %}{% endif %}
+{% endif %}
+--------------------------------------------------------------------------------
+
+(template
+  (if_statement
+    condition: (expression)
+    body: (if_statement
+      condition: (expression))))
+
+================================================================================
+nested else
+================================================================================
+{% if x %}
+{% else %}
+  {% if x %}
+    foo
+  {% else %}
+    foo
+  {% endif %}
+{% endif %}
+--------------------------------------------------------------------------------
+
+(template
+  (if_statement
+    condition: (expression)
+    else: (else_statement
+      body: (if_statement
+        condition: (expression)
+        body: (text)
+        else: (else_statement
+          body: (text))))))
+
+================================================================================
+nested elif
+================================================================================
+{% if x %}
+{% elif x %}
+  {% if x %}
+    foo
+  {% elif x %}
+    foo
+  {% endif %}
+{% elif x %}
+  {% if x %}
+    foo
+  {% else %}
+    foo
+  {% endif %}
+{% endif %}
+--------------------------------------------------------------------------------
+
+(template
+  (if_statement
+    condition: (expression)
+    elif: (elif_statement
+      condition: (expression)
+      (if_statement
+        condition: (expression)
+        body: (text)
+        elif: (elif_statement
+          condition: (expression)
+          (text))))
+    elif: (elif_statement
+      condition: (expression)
+      (if_statement
+        condition: (expression)
+        body: (text)
+        elsefor_statement: (else_statement
+          body: (text))))))
