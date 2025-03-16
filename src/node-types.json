@@ -31,7 +31,35 @@
       "required": false,
       "types": [
         {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
           "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
           "named": true
         },
         {
@@ -39,7 +67,31 @@
           "named": true
         },
         {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
           "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
           "named": true
         }
       ]
@@ -54,7 +106,35 @@
       "required": false,
       "types": [
         {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
           "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
           "named": true
         },
         {
@@ -62,7 +142,31 @@
           "named": true
         },
         {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
           "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
           "named": true
         }
       ]
@@ -102,7 +206,35 @@
           "named": true
         },
         {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
           "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
           "named": true
         },
         {
@@ -110,7 +242,31 @@
           "named": true
         },
         {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
           "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
           "named": true
         },
         {
@@ -167,7 +323,498 @@
     }
   },
   {
+    "type": "jinja_assignment_statement",
+    "named": true,
+    "fields": {
+      "code": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "jinja_block_statement",
+    "named": true,
+    "fields": {
+      "id": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_for_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_identifier",
+          "named": true
+        },
+        {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_call_statement",
+    "named": true,
+    "fields": {
+      "call": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_for_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "jinja_comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "jinja_custom_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "jinja_custom_tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_custom_tag",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "jinja_elif_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_for_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_else_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "doctype",
+            "named": true
+          },
+          {
+            "type": "element",
+            "named": true
+          },
+          {
+            "type": "entity",
+            "named": true
+          },
+          {
+            "type": "erroneous_end_tag",
+            "named": true
+          },
+          {
+            "type": "jinja_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_block_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_call_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_comment",
+            "named": true
+          },
+          {
+            "type": "jinja_custom_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_end_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_extends_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_filter_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_for_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_if_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_import_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_include_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_macro_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_output",
+            "named": true
+          },
+          {
+            "type": "jinja_raw_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_with_statement",
+            "named": true
+          },
+          {
+            "type": "script_element",
+            "named": true
+          },
+          {
+            "type": "style_element",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "jinja_end_assignment_statement",
     "named": true,
     "fields": {}
   },
@@ -175,6 +822,135 @@
     "type": "jinja_expression",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "jinja_extends_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "jinja_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_filter_statement",
+    "named": true,
+    "fields": {
+      "code": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_for_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "jinja_for_else_statement",
@@ -201,7 +977,35 @@
             "named": true
           },
           {
+            "type": "jinja_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_block_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_call_statement",
+            "named": true
+          },
+          {
             "type": "jinja_comment",
+            "named": true
+          },
+          {
+            "type": "jinja_custom_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_end_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_extends_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_filter_statement",
             "named": true
           },
           {
@@ -209,7 +1013,31 @@
             "named": true
           },
           {
+            "type": "jinja_if_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_import_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_include_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_macro_statement",
+            "named": true
+          },
+          {
             "type": "jinja_output",
+            "named": true
+          },
+          {
+            "type": "jinja_raw_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_with_statement",
             "named": true
           },
           {
@@ -253,7 +1081,35 @@
             "named": true
           },
           {
+            "type": "jinja_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_block_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_call_statement",
+            "named": true
+          },
+          {
             "type": "jinja_comment",
+            "named": true
+          },
+          {
+            "type": "jinja_custom_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_end_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_extends_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_filter_statement",
             "named": true
           },
           {
@@ -261,7 +1117,31 @@
             "named": true
           },
           {
+            "type": "jinja_if_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_import_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_include_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_macro_statement",
+            "named": true
+          },
+          {
             "type": "jinja_output",
+            "named": true
+          },
+          {
+            "type": "jinja_raw_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_with_statement",
             "named": true
           },
           {
@@ -301,6 +1181,299 @@
     }
   },
   {
+    "type": "jinja_if_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "doctype",
+            "named": true
+          },
+          {
+            "type": "element",
+            "named": true
+          },
+          {
+            "type": "entity",
+            "named": true
+          },
+          {
+            "type": "erroneous_end_tag",
+            "named": true
+          },
+          {
+            "type": "jinja_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_block_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_call_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_comment",
+            "named": true
+          },
+          {
+            "type": "jinja_custom_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_end_assignment_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_extends_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_filter_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_for_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_if_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_import_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_include_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_macro_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_output",
+            "named": true
+          },
+          {
+            "type": "jinja_raw_statement",
+            "named": true
+          },
+          {
+            "type": "jinja_with_statement",
+            "named": true
+          },
+          {
+            "type": "script_element",
+            "named": true
+          },
+          {
+            "type": "style_element",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_expression",
+            "named": true
+          }
+        ]
+      },
+      "elif": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "jinja_elif_statement",
+            "named": true
+          }
+        ]
+      },
+      "else": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "jinja_else_statement",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "jinja_import_statement",
+    "named": true,
+    "fields": {
+      "id": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "jinja_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_include_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "jinja_identifier",
+          "named": true
+        },
+        {
+          "type": "jinja_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_macro_statement",
+    "named": true,
+    "fields": {
+      "signature": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "jinja_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_for_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "jinja_output",
     "named": true,
     "fields": {},
@@ -316,20 +1489,90 @@
     }
   },
   {
-    "type": "quoted_attribute_value",
+    "type": "jinja_raw_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jinja_string",
     "named": true,
     "fields": {}
   },
   {
-    "type": "raw_text",
+    "type": "jinja_with_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "assignment": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "jinja_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
           "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
           "named": true
         },
         {
@@ -337,7 +1580,123 @@
           "named": true
         },
         {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
           "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quoted_attribute_value",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "raw_text",
+    "named": false,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_for_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
           "named": true
         }
       ]
@@ -411,7 +1770,35 @@
           "named": true
         },
         {
+          "type": "jinja_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_block_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_call_statement",
+          "named": true
+        },
+        {
           "type": "jinja_comment",
+          "named": true
+        },
+        {
+          "type": "jinja_custom_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_end_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_extends_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_filter_statement",
           "named": true
         },
         {
@@ -419,7 +1806,31 @@
           "named": true
         },
         {
+          "type": "jinja_if_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_import_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_include_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_macro_statement",
+          "named": true
+        },
+        {
           "type": "jinja_output",
+          "named": true
+        },
+        {
+          "type": "jinja_raw_statement",
+          "named": true
+        },
+        {
+          "type": "jinja_with_statement",
           "named": true
         },
         {
@@ -493,6 +1904,10 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": "/>",
     "named": false
   },
@@ -517,6 +1932,10 @@
     "named": false
   },
   {
+    "type": "_keyword",
+    "named": false
+  },
+  {
     "type": "comment",
     "named": true
   },
@@ -533,6 +1952,10 @@
     "named": true
   },
   {
+    "type": "jinja_identifier",
+    "named": true
+  },
+  {
     "type": "jinja_statement_end",
     "named": false
   },
@@ -542,6 +1965,14 @@
   },
   {
     "type": "keyword",
+    "named": false
+  },
+  {
+    "type": "raw_end",
+    "named": false
+  },
+  {
+    "type": "raw_start",
     "named": false
   },
   {

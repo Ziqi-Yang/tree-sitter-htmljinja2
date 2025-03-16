@@ -115,6 +115,19 @@
         }
       ]
     },
+    "standalone_tag": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "start_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "end_tag"
+        }
+      ]
+    },
     "start_tag": {
       "type": "SEQ",
       "members": [
@@ -593,6 +606,58 @@
         {
           "type": "SYMBOL",
           "name": "jinja_for_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_if_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_macro_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_call_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_filter_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_assignment_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_end_assignment_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_extends_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_block_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_include_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_import_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_with_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_raw_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jinja_custom_statement"
         }
       ]
     },
@@ -806,6 +871,1595 @@
         }
       ]
     },
+    "jinja_if_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "if"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "condition",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_jinja_expression_in_statement"
+                },
+                "named": true,
+                "value": "jinja_expression"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_node"
+            }
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "elif",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "jinja_elif_statement"
+            }
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "else",
+              "content": {
+                "type": "SYMBOL",
+                "name": "jinja_else_statement"
+              }
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\{\\%[\\+\\-]?"
+                  },
+                  "named": false,
+                  "value": "jinja_statement_start"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "STRING",
+                        "value": "endif"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "keyword"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[\\+\\-]?\\%\\}"
+                  },
+                  "named": false,
+                  "value": "jinja_statement_end"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_elif_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "elif"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "condition",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_jinja_expression_in_statement"
+                },
+                "named": true,
+                "value": "jinja_expression"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
+        }
+      ]
+    },
+    "jinja_else_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "else"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_node"
+            }
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "endif"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_macro_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "macro"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "signature",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_jinja_expression_in_statement"
+                },
+                "named": true,
+                "value": "jinja_expression"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "endmacro"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_call_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "call"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "call",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_jinja_expression_in_statement"
+                },
+                "named": true,
+                "value": "jinja_expression"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "endcall"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_filter_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "filter"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "code",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_jinja_expression_in_statement"
+                },
+                "named": true,
+                "value": "jinja_expression"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "endfilter"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_assignment_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\{\\%[\\+\\-]?"
+          },
+          "named": false,
+          "value": "jinja_statement_start"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": "set"
+              }
+            }
+          },
+          "named": false,
+          "value": "keyword"
+        },
+        {
+          "type": "FIELD",
+          "name": "code",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_jinja_expression_in_statement"
+            },
+            "named": true,
+            "value": "jinja_expression"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[\\+\\-]?\\%\\}"
+          },
+          "named": false,
+          "value": "jinja_statement_end"
+        }
+      ]
+    },
+    "jinja_end_assignment_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\{\\%[\\+\\-]?"
+          },
+          "named": false,
+          "value": "jinja_statement_start"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": "endset"
+              }
+            }
+          },
+          "named": false,
+          "value": "keyword"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[\\+\\-]?\\%\\}"
+          },
+          "named": false,
+          "value": "jinja_statement_end"
+        }
+      ]
+    },
+    "jinja_extends_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\{\\%[\\+\\-]?"
+          },
+          "named": false,
+          "value": "jinja_statement_start"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": "extends"
+              }
+            }
+          },
+          "named": false,
+          "value": "keyword"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_jinja_expression_in_statement"
+          },
+          "named": true,
+          "value": "jinja_expression"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[\\+\\-]?\\%\\}"
+          },
+          "named": false,
+          "value": "jinja_statement_end"
+        }
+      ]
+    },
+    "jinja_block_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "block"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "id",
+              "content": {
+                "type": "SYMBOL",
+                "name": "jinja_identifier"
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "STRING",
+                        "value": "scoped"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "keyword"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "STRING",
+                        "value": "required"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "keyword"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "endblock"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "jinja_identifier"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_include_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\{\\%[\\+\\-]?"
+          },
+          "named": false,
+          "value": "jinja_statement_start"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": "include"
+              }
+            }
+          },
+          "named": false,
+          "value": "keyword"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "jinja_string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "jinja_identifier"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "ignore missing"
+              },
+              "named": false,
+              "value": "_keyword"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "STRING",
+                        "value": "with context"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "keyword"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "STRING",
+                        "value": "without context"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "keyword"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[\\+\\-]?\\%\\}"
+          },
+          "named": false,
+          "value": "jinja_statement_end"
+        }
+      ]
+    },
+    "jinja_import_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "import"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "id",
+              "content": {
+                "type": "SYMBOL",
+                "name": "jinja_string"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "as"
+              },
+              "named": false,
+              "value": "_keyword"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "jinja_identifier"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "STRING",
+                            "value": "with context"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "keyword"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "STRING",
+                            "value": "without context"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "keyword"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "from"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "FIELD",
+              "name": "id",
+              "content": {
+                "type": "SYMBOL",
+                "name": "jinja_string"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "import"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "jinja_identifier"
+                    },
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "jinja_identifier"
+                        },
+                        {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PREC",
+                              "value": 1,
+                              "content": {
+                                "type": "STRING",
+                                "value": "as"
+                              }
+                            }
+                          },
+                          "named": false,
+                          "value": "keyword"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "jinja_identifier"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "jinja_identifier"
+                          },
+                          {
+                            "type": "SEQ",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "jinja_identifier"
+                              },
+                              {
+                                "type": "ALIAS",
+                                "content": {
+                                  "type": "TOKEN",
+                                  "content": {
+                                    "type": "PREC",
+                                    "value": 1,
+                                    "content": {
+                                      "type": "STRING",
+                                      "value": "as"
+                                    }
+                                  }
+                                },
+                                "named": false,
+                                "value": "keyword"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "jinja_identifier"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "STRING",
+                            "value": "with context"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "keyword"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "STRING",
+                            "value": "without context"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "keyword"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_with_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "with"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "assignment",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_jinja_expression_in_statement"
+                    },
+                    "named": true,
+                    "value": "jinja_expression"
+                  }
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\{\\%[\\+\\-]?"
+              },
+              "named": false,
+              "value": "jinja_statement_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "STRING",
+                    "value": "endwith"
+                  }
+                }
+              },
+              "named": false,
+              "value": "keyword"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[\\+\\-]?\\%\\}"
+              },
+              "named": false,
+              "value": "jinja_statement_end"
+            }
+          ]
+        }
+      ]
+    },
+    "jinja_raw_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\{\\%[\\+\\-]?"
+                  },
+                  "named": false,
+                  "value": "jinja_statement_start"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\s*raw\\s*"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[\\+\\-]?\\%\\}"
+                  },
+                  "named": false,
+                  "value": "jinja_statement_end"
+                }
+              ]
+            }
+          },
+          "named": false,
+          "value": "raw_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\{\\%[\\+\\-]?"
+                  },
+                  "named": false,
+                  "value": "jinja_statement_start"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\s*endraw\\s*"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[\\+\\-]?\\%\\}"
+                  },
+                  "named": false,
+                  "value": "jinja_statement_end"
+                }
+              ]
+            }
+          },
+          "named": false,
+          "value": "raw_end"
+        }
+      ]
+    },
+    "jinja_custom_statement": {
+      "type": "PREC_DYNAMIC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "\\{\\%[\\+\\-]?"
+            },
+            "named": false,
+            "value": "jinja_statement_start"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_jinja_expression_in_statement"
+            },
+            "named": true,
+            "value": "jinja_custom_tag"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[\\+\\-]?\\%\\}"
+            },
+            "named": false,
+            "value": "jinja_statement_end"
+          }
+        ]
+      }
+    },
+    "jinja_identifier": {
+      "type": "PATTERN",
+      "value": "[\\w]+"
+    },
+    "jinja_string": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\""
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\\"]+"
+            },
+            {
+              "type": "STRING",
+              "value": "\""
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "'"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\']+"
+            },
+            {
+              "type": "STRING",
+              "value": "'"
+            }
+          ]
+        }
+      ]
+    },
     "jinja_comment": {
       "type": "SEQ",
       "members": [
@@ -871,7 +2525,15 @@
       "value": "\\s+"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "jinja_elif_statement"
+    ],
+    [
+      "element",
+      "standalone_tag"
+    ]
+  ],
   "precedences": [],
   "externals": [
     {

@@ -2,11 +2,11 @@ export function sep1(rule, separator) {
   return seq(rule, repeat(seq(separator, rule)));
 }
 
-function jinja_statement_start() {
+export function jinja_statement_start() {
   return alias(/\{\%[\+\-]?/, "jinja_statement_start");
 }
 
-function jinja_statement_end() {
+export function jinja_statement_end() {
   return alias(/[\+\-]?\%\}/, "jinja_statement_end");
 }
 
@@ -25,6 +25,6 @@ export function jinja_keyword(kw) {
   return alias(token(prec(1, kw)), "keyword");
 }
 
-function context_specifier() {
-  return choice(keyword("with context"), keyword("without context"));
+export function jinja_context_specifier() {
+  return choice(jinja_keyword("with context"), jinja_keyword("without context"));
 }

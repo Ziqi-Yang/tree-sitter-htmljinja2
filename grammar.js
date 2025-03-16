@@ -7,7 +7,15 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const { sep1, jinja_statement, jinja_expression_in_statement, jinja_keyword } = require('./utils.js');
+const {
+  sep1,
+  jinja_statement_start,
+  jinja_statement_end,
+  jinja_statement,
+  jinja_expression_in_statement,
+  jinja_keyword,
+  jinja_context_specifier
+} = require('./utils.js');
 
 module.exports = grammar({
   name: "htmljinja2",
@@ -16,6 +24,8 @@ module.exports = grammar({
     $.comment,
     /\s+/,
   ],
+  
+  conflicts: ($) => [[$.jinja_elif_statement]],
 
   externals: ($) => [
     $._start_tag_name,
@@ -62,7 +72,7 @@ module.exports = grammar({
       ),
       $.self_closing_tag,
     ),
-
+    
     start_tag: $ => seq(
       '<',
       alias($._start_tag_name, $.tag_name),
@@ -70,6 +80,20 @@ module.exports = grammar({
       '>',
     ),
 
+    
+    end_tag: $ => seq(
+      '</',
+      alias($._end_tag_name, $.tag_name),
+      '>',
+    ),
+
+    erroneous_end_tag: $ => seq(
+      '</',
+      $.erroneous_end_tag_name,
+      '>',
+    ),
+
+    
     self_closing_tag: $ => seq(
       '<',
       alias($._start_tag_name, $.tag_name),
@@ -154,18 +178,6 @@ module.exports = grammar({
       ), '"'),
     ),
 
-    
-    end_tag: $ => seq(
-      '</',
-      alias($._end_tag_name, $.tag_name),
-      '>',
-    ),
-
-    erroneous_end_tag: $ => seq(
-      '</',
-      $.erroneous_end_tag_name,
-      '>',
-    ),
 
     entity: _ => /&(#([xX][0-9a-fA-F]{1,6}|[0-9]{1,5})|[A-Za-z]{1,30});?/,
     
@@ -183,8 +195,24 @@ module.exports = grammar({
       seq("{{", alias(optional($._jinja_output_code), $.jinja_expression), "}}"),
     _jinja_output_code: () => prec.right(repeat1(/[^\s\}\-\+]+|[\}\-\+]/)),
 
+
+
+    
     _jinja_statement: $ => choice(
       $.jinja_for_statement,
+      $.jinja_if_statement,
+      $.jinja_macro_statement,
+      $.jinja_call_statement,
+      $.jinja_filter_statement,
+      $.jinja_assignment_statement,
+      $.jinja_end_assignment_statement,
+      $.jinja_extends_statement,
+      $.jinja_block_statement,
+      $.jinja_include_statement,
+      $.jinja_import_statement,
+      $.jinja_with_statement,
+      $.jinja_raw_statement,
+      $.jinja_custom_statement,
     ),
 
     jinja_for_statement: $ => seq(
@@ -199,6 +227,131 @@ module.exports = grammar({
       jinja_statement("endfor"),
     ),
 
+
+    jinja_if_statement: $ => seq(
+      jinja_statement("if", field("condition", jinja_expression_in_statement($))),
+      field("body", repeat($._node)),
+      field("elif", repeat($.jinja_elif_statement)),
+      choice(field("else", $.jinja_else_statement), jinja_statement("endif")),
+    ),
+
+    jinja_elif_statement: $ => seq(
+      jinja_statement("elif", field("condition", jinja_expression_in_statement($))),
+      repeat($._node),
+    ),
+
+    jinja_else_statement: $ => seq(
+      jinja_statement("else"),
+      field("body", repeat($._node)),
+      jinja_statement("endif"),
+    ),
+
+
+    jinja_macro_statement: $ => seq(
+      jinja_statement("macro", field("signature", jinja_expression_in_statement($))),
+      repeat($._node),
+      jinja_statement("endmacro"),
+    ),
+
+    jinja_call_statement: $ => seq(
+      jinja_statement("call", field("call", jinja_expression_in_statement($))),
+      repeat($._node),
+      jinja_statement("endcall"),
+    ),
+
+    jinja_filter_statement: $ => seq(
+      jinja_statement("filter", field("code", jinja_expression_in_statement($))),
+      repeat($._node),
+      jinja_statement("endfilter"),
+    ),
+
+    jinja_assignment_statement: $ => jinja_statement(
+      "set", field("code", jinja_expression_in_statement($))
+    ),
+
+    jinja_end_assignment_statement: $ => jinja_statement("endset"),
+
+    jinja_extends_statement: $ => jinja_statement(
+      "extends", jinja_expression_in_statement($)
+    ),
+
+    jinja_block_statement: $ => seq(
+      jinja_statement(
+        "block",
+        field("id", $.jinja_identifier),
+        optional(jinja_keyword("scoped")),
+        optional(jinja_keyword("required")),
+      ),
+      repeat($._node),
+      jinja_statement("endblock", optional($.jinja_identifier)),
+    ),
+
+    jinja_include_statement: $ => jinja_statement(
+      "include",
+      choice($.jinja_string, $.jinja_identifier),
+      optional(alias("ignore missing", "_keyword")),
+      optional(jinja_context_specifier()),
+    ),
+
+    jinja_import_statement: $ => choice(
+      jinja_statement(
+        "import",
+        field("id", $.jinja_string),
+        alias("as", "_keyword"),
+        $.jinja_identifier,
+        optional(jinja_context_specifier()),
+      ),
+      jinja_statement(
+        "from",
+        field("id", $.jinja_string),
+        jinja_keyword("import"),
+        sep1(
+          choice(
+            $.jinja_identifier,
+            seq($.jinja_identifier, jinja_keyword("as"), $.jinja_identifier),
+          ),
+          ",",
+        ),
+        optional(jinja_context_specifier()),
+      ),
+    ),
+
+    jinja_with_statement: $ => seq(
+      jinja_statement(
+        "with",
+        optional(field("assignment", jinja_expression_in_statement($))),
+      ),
+      repeat($._node),
+      jinja_statement("endwith"),
+    ),
+
+    jinja_raw_statement: $ => seq(
+      alias(
+        token(seq(jinja_statement_start(), /\s*raw\s*/, jinja_statement_end())),
+        "raw_start",
+      ),
+      $.text,
+      alias(
+        token(seq(jinja_statement_start(), /\s*endraw\s*/, jinja_statement_end())),
+        "raw_end",
+      ),
+    ),
+
+    jinja_custom_statement: $ => prec.dynamic(
+      -1,
+      seq(
+        jinja_statement_start(),
+        alias($._jinja_expression_in_statement, $.jinja_custom_tag),
+        jinja_statement_end(),
+      ),
+    ),
+
+
+    
+    jinja_identifier: () => /[\w]+/,
+
+    jinja_string: () => choice(seq(`"`, /[^\"]+/, `"`), seq(`'`, /[^\']+/, `'`)),
+    
     jinja_comment: () => seq("{#", repeat(/[^\#]+|[\#]/), "#}"),
 
     
