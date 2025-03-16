@@ -12,7 +12,7 @@ enum TokenType {
     SELF_CLOSING_TAG_DELIMITER,
     IMPLICIT_END_TAG,
     RAW_TEXT,
-    COMMENT,
+    HTML_COMMENT,
 };
 
 typedef struct {
@@ -127,7 +127,7 @@ static bool scan_comment(TSLexer *lexer) {
                 break;
             case '>':
                 if (dashes >= 2) {
-                    lexer->result_symbol = COMMENT;
+                    lexer->result_symbol = HTML_COMMENT;
                     advance(lexer);
                     lexer->mark_end(lexer);
                     return true;

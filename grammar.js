@@ -23,12 +23,17 @@ module.exports = grammar({
   name: "htmljinja2",
 
   extras: $ => [
-    $.comment,
+    // it can appear anywhere in the tree structure, not in alias
+    // for example,
+    // alias(repeat($._node), $.body)  => (html_comment) (body)
+    $.html_comment,  
     /\s+/,
   ],
   
   conflicts: ($) => [
-    [$.jinja_elif_statement],
+    [$.jinja_for_else_statement],
+    [$.jinja_if_elif_statement],
+    [$.jinja_if_else_statement],
     [$.single_element, $.element]
   ],
 
@@ -41,7 +46,7 @@ module.exports = grammar({
     '/>',
     $._implicit_end_tag,
     $._raw_text,
-    $.comment,
+    $.html_comment,
   ],
 
 
@@ -236,64 +241,112 @@ module.exports = grammar({
     ),
 
     jinja_for_statement: $ => seq(
-      jinja_statement("for", field("iteration", jinja_expression_in_statement($))),
-      field("body", repeat($._node)),
-      choice($.jinja_for_else_statement, jinja_statement("endfor")),
+      alias($.jinja_for_statement_start, $.start_statement),
+      alias(repeat($._node), $.body),
+      optional(alias($.jinja_for_else_statement, $.else_statement)),
+      alias($.jinja_for_statement_end, $.end_statement)
     ),
+
+    jinja_for_statement_start: $ => jinja_statement(
+      "for", field("iteration", jinja_expression_in_statement($))
+    ),
+
+    jinja_for_statement_end: _ => jinja_statement("endfor"),
 
     jinja_for_else_statement: $ => seq(
-      jinja_statement("else"),
-      field("body", repeat($._node)),
-      jinja_statement("endfor"),
+      alias($.jinja_for_statement_else, $.statement),
+      alias(repeat($._node), $.body),
     ),
 
+    jinja_for_statement_else: _ => jinja_statement("else"),
+
+    
+    
 
     jinja_if_statement: $ => seq(
-      jinja_statement("if", field("condition", jinja_expression_in_statement($))),
-      field("body", repeat(choice(
+      alias($.jinja_if_statement_start, $.start_statement),
+      alias(repeat(choice(
         $._node,
         $.single_element,
-      ))),
-      field("elif", repeat($.jinja_elif_statement)),
-      choice(field("else", $.jinja_else_statement), jinja_statement("endif")),
+      )), $.body),
+      repeat(alias($.jinja_if_elif_statement, $.elif_statement)),
+      optional(alias($.jinja_if_else_statement, $.else_statement)),
+      alias($.jinja_if_statement_end, $.end_statement)
     ),
 
-    jinja_elif_statement: $ => seq(
-      jinja_statement("elif", field("condition", jinja_expression_in_statement($))),
-      repeat(choice(
-        $._node,
-        $.single_element,
-      )),
-    ),
-
-    jinja_else_statement: $ => seq(
-      jinja_statement("else"),
-      field("body", repeat(choice(
-        $._node,
-        $.single_element,
-      ))),
-      jinja_statement("endif"),
+    jinja_if_statement_start: $ => jinja_statement(
+      "if", field("condition", jinja_expression_in_statement($))
     ),
 
 
+    jinja_if_elif_statement: $ => seq(
+      alias($.jinja_if_statement_elif, $.statement),
+      alias(repeat(choice(
+        $._node,
+        $.single_element,
+      )), $.body),
+    ),
+
+    jinja_if_statement_elif: $ => jinja_statement(
+      "elif", field("condition", jinja_expression_in_statement($))
+    ),
+    
+    jinja_if_else_statement: $ => seq(
+      alias($.jinja_if_statement_else, $.statement),
+      alias(repeat(choice(
+        $._node,
+        $.single_element,
+      )), $.body),
+    ),
+
+    jinja_if_statement_else: _ => jinja_statement("else"),
+    jinja_if_statement_end: _ => jinja_statement("endif"),
+
+
+    
+    
     jinja_macro_statement: $ => seq(
-      jinja_statement("macro", field("signature", jinja_expression_in_statement($))),
-      repeat($._node),
-      jinja_statement("endmacro"),
+      alias($.jinja_macro_statement_start, $.start_statement),
+      alias(repeat($._node), $.body),
+      alias($.jinja_macro_statement_end, $.end_statement)
     ),
 
+    jinja_macro_statement_start: $ => jinja_statement(
+      "macro", field("signature", jinja_expression_in_statement($))
+    ),
+
+    jinja_macro_statement_end: _ => jinja_statement("endmacro"),
+
+
+    
     jinja_call_statement: $ => seq(
-      jinja_statement("call", field("call", jinja_expression_in_statement($))),
-      repeat($._node),
-      jinja_statement("endcall"),
+      alias($.jinja_call_statement_start, $.start_statement),
+      alias(repeat($._node), $.body),
+      alias($.jinja_call_statement_end, $.end_statement),
     ),
 
+    jinja_call_statement_start: $ => jinja_statement(
+      "call", field("call", jinja_expression_in_statement($))
+    ),
+
+    jinja_call_statement_end: _ => jinja_statement("endcall"),
+
+
+    
     jinja_filter_statement: $ => seq(
-      jinja_statement("filter", field("code", jinja_expression_in_statement($))),
-      repeat($._node),
-      jinja_statement("endfilter"),
+      alias($.jinja_filter_statement_start, $.start_statement),
+      field("body", repeat($._node)),
+      alias($.jinja_filter_statement_end, $.end_statement),
     ),
 
+    jinja_filter_statement_start: $ => jinja_statement(
+      "filter", field("code", jinja_expression_in_statement($))
+    ),
+
+    jinja_filter_statement_end: _ => jinja_statement("endfilter"),
+
+
+    
     jinja_assignment_statement: $ => jinja_statement(
       "set", field("code", jinja_expression_in_statement($))
     ),
@@ -304,16 +357,27 @@ module.exports = grammar({
       "extends", jinja_expression_in_statement($)
     ),
 
+
+    
     jinja_block_statement: $ => seq(
-      jinja_statement(
-        "block",
-        field("id", $.jinja_identifier),
-        optional(jinja_keyword("scoped")),
-        optional(jinja_keyword("required")),
-      ),
-      repeat($._node),
-      jinja_statement("endblock", optional($.jinja_identifier)),
+      alias($.jinja_block_statement_start, $.start_statement),
+      field("body", repeat($._node)),
+      alias($.jinja_block_statement_end, $.end_statement),
     ),
+
+    jinja_block_statement_start: $ => jinja_statement(
+      "block",
+      field("id", $.jinja_identifier),
+      optional(jinja_keyword("scoped")),
+      optional(jinja_keyword("required")),
+    ),
+
+    jinja_block_statement_end: $ => jinja_statement(
+      "endblock", 
+      optional($.jinja_identifier)
+    ),
+
+    
 
     jinja_include_statement: $ => jinja_statement(
       "include",
@@ -345,26 +409,40 @@ module.exports = grammar({
       ),
     ),
 
+    
     jinja_with_statement: $ => seq(
-      jinja_statement(
-        "with",
-        optional(field("assignment", jinja_expression_in_statement($))),
-      ),
-      repeat($._node),
-      jinja_statement("endwith"),
+      alias($.jinja_with_statement_start, $.start_statement),
+      alias(repeat($._node), $.body),
+      alias($.jinja_with_statement_end, $.end_statement),
     ),
+
+    jinja_with_statement_start: $ => jinja_statement(
+      "with",
+      optional(field("assignment", jinja_expression_in_statement($))),
+    ),
+
+    jinja_with_statement_end: _ => jinja_statement("endwith"),
+    
+    
 
     jinja_raw_statement: $ => seq(
-      jinja_statement("raw"),
-      $._html_node,
-      jinja_statement("endraw"),
+      alias($.jinja_raw_statement_start, $.start_statement),
+      field("body", $._html_node),
+      alias($.jinja_raw_statement_end, $.end_statement),
     ),
 
-    jinja_custom_statement: $ => seq(
+    jinja_raw_statement_start: _ => jinja_statement("raw"),
+
+    jinja_raw_statement_end: _ => jinja_statement("endraw"),
+
+
+    
+    // dynamic prec -1 to not mess up with multiple elif
+    jinja_custom_statement: $ => prec.dynamic(-1, seq(
       jinja_statement_start(),
       alias($._jinja_expression_in_statement, $.jinja_custom_tag),
       jinja_statement_end(),
-    ),
+    )),
 
 
     
@@ -377,17 +455,16 @@ module.exports = grammar({
     
 
     // Common ==================================================================
-    text: (_) =>
-      prec.right(
-        repeat1(
-          choice(
-            // Single open brace with low precedence (similar to Jinja2 rule)
-            token(prec(-1, /\{/)),
+    text: _ => prec.right(
+      repeat1(
+        choice(
+          // Single open brace with low precedence (similar to Jinja2 rule)
+          token(prec(-1, /\{/)),
         
-            // Text content that respects both HTML and Jinja2 special characters
-            token(prec(1, /[^<>&\s\{][^<>&\{]*[^<>&\s\{]?/)),
-          )
-        ),
+          // Text content that respects both HTML and Jinja2 special characters
+          token(prec(1, /[^<>&\s\{][^<>&\{]*[^<>&\s\{]?/)),
+        )
       ),
+    ),
   }
 });

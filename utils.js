@@ -17,8 +17,9 @@ export function jinja_statement(kw, ...rest) {
   return seq(jinja_statement_start(), jinja_keyword(kw), ...rest, jinja_statement_end());
 }
 
+
 export function jinja_expression_in_statement($) {
-  return alias($._jinja_expression_in_statement, $.jinja_expression);
+  return alias($._jinja_expression_in_statement, $.expression);
 }
 
 export function jinja_keyword(kw) {
