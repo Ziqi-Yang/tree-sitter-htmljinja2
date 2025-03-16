@@ -34,6 +34,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "single_element"
+        },
+        {
+          "type": "SYMBOL",
           "name": "entity"
         },
         {
@@ -115,7 +119,7 @@
         }
       ]
     },
-    "standalone_tag": {
+    "single_element": {
       "type": "CHOICE",
       "members": [
         {
@@ -150,6 +154,45 @@
             "type": "SYMBOL",
             "name": "attribute"
           }
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
+    },
+    "end_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "</"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_end_tag_name"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
+    },
+    "erroneous_end_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "</"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "erroneous_end_tag_name"
         },
         {
           "type": "STRING",
@@ -489,45 +532,6 @@
               "value": "\""
             }
           ]
-        }
-      ]
-    },
-    "end_tag": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "</"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_end_tag_name"
-          },
-          "named": true,
-          "value": "tag_name"
-        },
-        {
-          "type": "STRING",
-          "value": ">"
-        }
-      ]
-    },
-    "erroneous_end_tag": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "</"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "erroneous_end_tag_name"
-        },
-        {
-          "type": "STRING",
-          "value": ">"
         }
       ]
     },
@@ -2530,8 +2534,8 @@
       "jinja_elif_statement"
     ],
     [
-      "element",
-      "standalone_tag"
+      "single_element",
+      "element"
     ]
   ],
   "precedences": [],

@@ -25,7 +25,10 @@ module.exports = grammar({
     /\s+/,
   ],
   
-  conflicts: ($) => [[$.jinja_elif_statement]],
+  conflicts: ($) => [
+    [$.jinja_elif_statement],
+    [$.single_element, $.element]
+  ],
 
   externals: ($) => [
     $._start_tag_name,
@@ -49,6 +52,7 @@ module.exports = grammar({
       $.style_element,
       $.erroneous_end_tag,
       $.element,
+      $.single_element, // 🐶
       $.entity,
       $.text,
       $._jinja
@@ -71,6 +75,11 @@ module.exports = grammar({
         choice($.end_tag, $._implicit_end_tag),
       ),
       $.self_closing_tag,
+    ),
+    
+    single_element: $ => choice(
+      $.start_tag,
+      $.end_tag
     ),
     
     start_tag: $ => seq(
