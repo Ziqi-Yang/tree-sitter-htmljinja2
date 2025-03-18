@@ -76,6 +76,22 @@ elements like `<div>` matches `</ul>`.
 Though, it does bring some benefits other than precision, such as 3x performance boost
 compared to allowing split elements everywhere.
 
+Since we currently don't allow split element in `blocks`,
+
+It's better to write explicit closing tag (`/>`) rather than implicit closing tag (`>`)
+for those single element.
+
+```django
+{% block head %}
+   <link rel="stylesheet" type="text/css" href="{% static 'style/typography.min.css' %}" />
+{% endblock %}
+```
+
+
+
+## Tips
+
+
 
 ## Reference
 
